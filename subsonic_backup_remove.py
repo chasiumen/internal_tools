@@ -21,14 +21,15 @@ else:
 	# range(	starting day, 		end date,		increment	)
 	#			untill 10days ago,	from X day,		1	(static)
 	#			1<x<y				, 	x<y,		1
-	for x in range(7, 15, 1):
+	for x in range(1, 15, 1):
 		date ='date +%Y%m%d --date \"' + str(x) +  ' days ago\"'
 		#date ='date +%Y%m%d --date \"' + str(x) +  ' days\"'
 
 		proc = subprocess.Popen([date], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 		(save, err) = proc.communicate()
 		save = save.strip()
-		path = '/var/subsonic/db_bkp_' + save
+		path = src + 'db_bkp_' + save
+        print path
 		
 	#get directory list
 		dlist = os.listdir(src)

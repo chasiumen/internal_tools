@@ -1,14 +1,14 @@
 #!/bin/bash
 #displays your current Global IP
 
-key="index.html"
+key="$HOME/bin/index.html"
 
 if [ $# -eq 0 ]; then
-        if [ -f index.html ]; then
-                rm index.html
+        if [ -f $HOME/bin/index.html ]; then
+                rm $HOME/bin/index.html
         fi
 
-        `wget -q "www.ipchicken.com"`
+        `wget -q -P $HOME/bin/ "www.ipchicken.com"`
 else
         echo "usage: ./myip.sh"
         exit 1

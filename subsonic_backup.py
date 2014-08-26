@@ -14,7 +14,7 @@ else:
 	save = save.strip()
 
 #set directory variables
-	dst = '/var/subsonic/db_bkp_' + save
+	dst = '/home/media/subsonic_backup/db_bkp_' + save
 	src = '/var/subsonic/db/'
 	
 #check and create backup directory
