@@ -75,10 +75,6 @@ def rename(path, fileNameOri, fileNameDest, dirName):
 #   1. Get list of file/dir
 #   2. Rename
 
-# [] GET_THIS_VALUE  -
-
-
-#infile = './[Zero-Raws] Seirei Tsukai no Blade Dance - 06 (MBS 1280x720 x264 AAC).mp4'
 #access_check(infile)
 #Check number of arg
 if len(sys.argv) != 1:
