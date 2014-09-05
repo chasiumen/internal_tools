@@ -55,14 +55,16 @@ def rename(path, fileNameOri, fileNameDest, dirName):
 #    print "src: %s" %src
 #    print "dst: %s" %dst
     #Check file duplicate
-    if os.path.isfile(dst):
-        print "Error! %s exists in the destination!" %fileNameDest
-        try:
-            shutil.move(src, dst)
-            print "%s:       [OK]" %fileNameDest
-        except IOError:
-            print "Error!", shutil.Error
-            sys.exit()
+    if os.path.isdir(dirNew):
+        if os.path.isfile(dst):
+            print "Error! %s exists in the destination!" %fileNameDest
+        else:
+            try:
+                shutil.move(src, dst)
+                print "%s:       [OK]" %fileNameDest
+            except IOError:
+                print "Error!", shutil.Error
+                sys.exit()
     else:
         try:
             #Create directory
