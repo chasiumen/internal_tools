@@ -57,7 +57,12 @@ def rename(path, fileNameOri, fileNameDest, dirName):
     #Check file duplicate
     if os.path.isfile(dst):
         print "Error! %s exists in the destination!" %fileNameDest
-        sys.exit()
+        try:
+            shutil.move(src, dst)
+            print "%s:       [OK]" %fileNameDest
+        except IOError:
+            print "Error!", shutil.Error
+            sys.exit()
     else:
         try:
             #Create directory
