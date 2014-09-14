@@ -7,7 +7,9 @@ import re, os, sys, shutil
 
 
 #working dir
-path='./'
+inPath='./'
+outPath='/home/plex_media'
+#path='./'
 
 #Check File access/persmission
 def accessCheck(x):
@@ -52,19 +54,17 @@ def rename(path, fileNameOri, fileNameDest, dirName):
     src=os.path.join(path, fileNameOri)
     dst=os.path.join(path, dirName, fileNameDest)
     dirNew=os.path.join(path, dirName)
+#    print dirNew
 #    print "src: %s" %src
 #    print "dst: %s" %dst
     #Check file duplicate
     if os.path.isdir(dirNew):
-        if os.path.isfile(dst):
-            print "Error! %s exists in the destination!" %fileNameDest
-        else:
-            try:
-                shutil.move(src, dst)
-                print "%s:       [OK]" %fileNameDest
-            except IOError:
-                print "Error!", shutil.Error
-                sys.exit()
+        try:
+            shutil.move(src, dst)
+            print "%s:       [OK]" %fileNameDest
+        except IOError:
+            print "Error!", shutil.Error
+            sys.exit()
     else:
         try:
             #Create directory
@@ -76,6 +76,35 @@ def rename(path, fileNameOri, fileNameDest, dirName):
             print "Error!", shutil.Error
             sys.exit()
     
+#Overload 
+def rename(inPath, outPath,  fileNameOri, fileNameDest, dirName):
+    #check file access
+    src=os.path.join(inPath, fileNameOri)
+    dst=os.path.join(outPath, dirName, fileNameDest)
+    dirNew=os.path.join(outPath, dirName)
+    print "==="*30
+#    print dirNew
+    print "src: %s" %src
+    print "dst: %s" %dst
+    #Check file duplicate
+    if os.path.isdir(dirNew):
+        try:
+            shutil.move(src, dst)
+            print "%s:       [OK]" %fileNameDest
+        except IOError:
+            print "Error!", shutil.Error
+            sys.exit()
+    else:
+        try:
+            #Create directory
+            os.mkdir(dirNew)
+            #move file to dirNew
+            shutil.move(src, dst)
+            print "%s:       [OK]" %fileNameDest
+        except IOError:
+            print "Error!", shutil.Error
+            sys.exit()
+ 
 
 ############### MAIN ###############
 #       //Precondition: Number of Arg
@@ -91,7 +120,8 @@ else:
     counter=0
     print "Argument check: [OK]"
     #Get list of files from current dirctory
-    infileList = ls(path)
+    #infileList = ls(path)
+    infileList = ls(inPath)
 #    print "infile: ", infileList
     #Read each files
     for infile in infileList:
@@ -101,7 +131,8 @@ else:
             fileName=parseFile(infile)
             dirName=mkdir(infile)
             #rename(fileNameOri, fileNameDest, dirName)
-            rename(path, infile, fileName, dirName)
+            #rename(path, infile, fileName, dirName)
+            rename(inPath, outPath,  infile, fileName, dirName)
             counter +=1
         else:
             pass
